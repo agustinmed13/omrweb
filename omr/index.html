@@ -1,0 +1,578 @@
+Aquí tienes una página web moderna y completa para OMR (One More Rep), una tienda de ropa personalizada con todas las características solicitadas:
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMR - One More Rep | Ropa Personalizada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&display=swap');
+        
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --light: #f1f1f1;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--light);
+            color: #333;
+        }
+        
+        .logo-font {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://placehold.co/1600x900');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .design-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .premade-toggle {
+            transition: all 0.3s ease;
+        }
+        
+        .premade-toggle.active {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .customization-panel {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .customization-panel.active {
+            max-height: 1000px;
+        }
+        
+        /* Animación para el carrito */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-15px);}
+            60% {transform: translateY(-7px);}
+        }
+        
+        .cart-bounce {
+            animation: bounce 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header y Navegación -->
+    <header class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-3xl logo-font text-gray-800">
+                    <span class="text-red-600">O</span>MR
+                </h1>
+                <span class="ml-2 text-sm bg-red-600 text-white px-2 py-1 rounded-full">One More Rep</span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#inicio" class="font-semibold hover:text-red-600 transition">Inicio</a>
+                <a href="#personaliza" class="font-semibold hover:text-red-600 transition">Personaliza</a>
+                <a href="#catalogo" class="font-semibold hover:text-red-600 transition">Catálogo</a>
+                <a href="#disenos" class="font-semibold hover:text-red-600 transition">Diseños</a>
+                <a href="#contacto" class="font-semibold hover:text-red-600 transition">Contacto</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button id="cartBtn" class="relative">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                </button>
+                <button class="md:hidden" id="mobileMenuBtn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white py-2 px-4 shadow-lg">
+            <a href="#inicio" class="block py-2 hover:text-red-600">Inicio</a>
+            <a href="#personaliza" class="block py-2 hover:text-red-600">Personaliza</a>
+            <a href="#catalogo" class="block py-2 hover:text-red-600">Catálogo</a>
+            <a href="#disenos" class="block py-2 hover:text-red-600">Diseños</a>
+            <a href="#contacto" class="block py-2 hover:text-red-600">Contacto</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-bg text-white pt-32 pb-20 md:pt-40 md:pb-28">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 logo-font">
+                CREA TU <span class="text-red-600">ESTILO</span> ÚNICO
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+                Diseña tu propia ropa deportiva con OMR. Calidad premium y personalización total.
+            </p>
+            <a href="#personaliza" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 inline-block">
+                Comenzar a diseñar
+            </a>
+        </div>
+    </section>
+
+    <!-- Product Customization -->
+    <section id="personaliza" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                <span class="border-b-4 border-red-600 pb-2">PERSONALIZA TU PRODUCTO</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Paso 1: Seleccionar tipo de producto -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <span class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">1</span>
+                        Selecciona tu producto
+                    </h3>
+                    <div class="space-y-3">
+                        <select id="productType" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600 focus:border-transparent">
+                            <option value="" disabled selected>Elige un producto</option>
+                            <option value="remera">Remera</option>
+                            <option value="hoodie">Hoodie</option>
+                            <option value="sweater">Sweater</option>
+                            <option value="gorra">Gorra</option>
+                            <option value="shorts">Shorts</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Paso 2: Seleccionar opciones de diseño -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <span class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">2</span>
+                        Opciones de diseño
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block mb-2 font-medium">Tamaño</label>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg">
+                                <option value="S">Small</option>
+                                <option value="M" selected>Medium</option>
+                                <option value="L">Large</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block mb-2 font-medium">Color</label>
+                            <div class="flex space-x-3">
+                                <div class="color-option bg-black w-8 h-8 rounded-full cursor-pointer border-2 border-gray-300"></div>
+                                <div class="color-option bg-white w-8 h-8 rounded-full cursor-pointer border-2 border-gray-300"></div>
+                                <div class="color-option bg-red-600 w-8 h-8 rounded-full cursor-pointer border-2 border-gray-300"></div>
+                                <div class="color-option bg-gray-600 w-8 h-8 rounded-full cursor-pointer border-2 border-gray-300"></div>
+                                <div class="color-option bg-blue-600 w-8 h-8 rounded-full cursor-pointer border-2 border-gray-300"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Paso 3: Diseño personalizado -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <span class="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">3</span>
+                        Diseño personalizado
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex space-x-2 mb-4">
+                            <button id="withDesign" class="premade-toggle active px-4 py-2 rounded-lg font-medium">Con estampa</button>
+                            <button id="withoutDesign" class="premade-toggle px-4 py-2 rounded-lg font-medium">Sin estampa</button>
+                        </div>
+                        
+                        <div id="customizationPanel" class="customization-panel active">
+                            <p class="mb-4">¿Deseas alguno de nuestros diseños o subir tu propio diseño?</p>
+                            
+                            <div class="mb-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="designOption" class="form-radio text-red-600" checked>
+                                    <span class="ml-2">Elegir de nuestros diseños</span>
+                                </label>
+                            </div>
+                            
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="designOption" class="form-radio text-red-600">
+                                    <span class="ml-2">Subir mi propio diseño</span>
+                                </label>
+                                <div id="uploadDesign" class="mt-4 hidden">
+                                    <label class="block mb-2">Sube tu diseño (JPG o PNG, max 5MB)</label>
+                                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                                        <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                                        <p class="text-sm text-gray-500">Arrastra tu archivo aquí o haz clic para seleccionar</p>
+                                        <input type="file" class="hidden" accept="image/jpeg, image/png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="addToCart" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 mt-4">
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vista previa del producto -->
+            <div class="mt-16 mx-auto max-w-2xl bg-gray-50 p-8 rounded-lg shadow-sm text-center">
+                <h3 class="text-xl font-bold mb-6">Vista previa de tu diseño</h3>
+                <div class="relative flex justify-center">
+                    <img id="productPreview" src="https://placehold.co/300x400" alt="Previsualización de producto OMR seleccionado" class="border border-gray-200 rounded-lg">
+                    
+                    <div id="designPreview" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-white opacity-90 rounded-lg shadow-md flex items-center justify-center">
+                        <p class="text-gray-500 text-sm">Tu diseño aparecerá aquí</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <p id="productDescription" class="text-gray-700">Selecciona un producto para ver la vista previa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de productos premade -->
+    <section id="catalogo" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                <span class="border-b-4 border-red-600 pb-2">PRODUCTOS DISPONIBLES</span>
+            </h2>
+            
+            <div class="text-center mb-8">
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto">Tenemos estos productos listos para enviar inmediatamente. Envío express disponible.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Producto 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x600" alt="Hoodie negro OMR con estampado frontal de diseño abstracto en rojo y blanco" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full">NUEVO</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Hoodie OMR Black</h3>
+                        <p class="text-gray-600 text-sm mb-2">Polialgodón premium, capucha ajustable</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-red-600">$49.99</span>
+                            <button class="add-premade-to-cart bg-black text-white px-3 py-1 rounded-full text-sm hover:bg-gray-800 transition">+ Carrito</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Producto 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x600" alt="Remera blanca OMR con logo minimalista en negro" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full">BAJO STOCK</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Remera OMR Classic</h3>
+                        <p class="text-gray-600 text-sm mb-2">100% algodón, corte regular</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-red-600">$29.99</span>
+                            <button class="add-premade-to-cart bg-black text-white px-3 py-1 rounded-full text-sm hover:bg-gray-800 transition">+ Carrito</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Producto 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <img src="https://placehold.co/600x600" alt="Gorra negra OMR con bordado frontal en hilo rojo" class="w-full h-64 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Gorra OMR Snapback</h3>
+                        <p class="text-gray-600 text-sm mb-2">Ajustable, 100% algodón</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-red-600">$24.99</span>
+                            <button class="add-premade-to-cart bg-black text-white px-3 py-1 rounded-full text-sm hover:bg-gray-800 transition">+ Carrito</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Producto 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x600" alt="Sweater gris OMR con diseño geométrico en negro y rojo" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2 bg-green-600 text-white text-xs px-2 py-1 rounded-full">EN OFERTA</div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Sweater OMR Premium</h3>
+                        <p class="text-gray-600 text-sm mb-2">Mezcla de algodón y poliéster</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="font-bold text-red-600">$39.99</span>
+                                <span class="text-gray-400 text-sm line-through ml-2">$49.99</span>
+                            </div>
+                            <button class="add-premade-to-cart bg-black text-white px-3 py-1 rounded-full text-sm hover:bg-gray-800 transition">+ Carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="border border-black px-6 py-2 rounded-full font-medium hover:bg-black hover:text-white transition">
+                    Ver todos los productos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de diseños -->
+    <section id="disenos" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                <span class="border-b-4 border-red-600 pb-2">NUESTROS DISEÑOS</span>
+            </h2>
+            
+            <div class="text-center mb-8">
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto">Inspírate con estos diseños que puedes agregar a tu producto personalizado.</p>
+            </div>
+            
+            <div class="design-gallery">
+                <!-- Diseño 1 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://placehold.co/400x400" alt="Diseño abstracto de energía con formas geométricas en negro, rojo y amarillo" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold mb-1">Energía Fractal</h3>
+                        <p class="text-sm text-gray-600 mb-2">Diseño geométrico moderno</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">+ $8.99</span>
+                            <span class="text-xs bg-gray-200 px-2 py-1 rounded">POPULAR</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Diseño 2 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://placehold.co/400x400" alt="Diseño de calavera estilizada con elementos florales en tonos rojos y negros" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold mb-1">Floral Skull</h3>
+                        <p class="text-sm text-gray-600 mb-2">Estilo urban dark</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">+ $9.99</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Diseño 3 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://placehold.co/400x400" alt="Ilustración minimalista de levantamiento de pesas con fondo degradado" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold mb-1">One More Rep</h3>
+                        <p class="text-sm text-gray-600 mb-2">Diseño minimalista fitness</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">+ $7.99</span>
+                            <span class="text-xs bg-gray-200 px-2 py-1 rounded">NUEVO</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Diseño 4 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://placehold.co/400x400" alt="Patrón de ondas psicodélicas en colores neón sobre fondo oscuro" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold mb-1">Neon Waves</h3>
+                        <p class="text-sm text-gray-600 mb-2">Efecto psicodélico</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">+ $10.99</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Diseño 5 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://placehold.co/400x400" alt="Retrato estilo cómic de deportista con efecto pop art en colores brillantes" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold mb-1">Urban Hero</h3>
+                        <p class="text-sm text-gray-600 mb-2">Estilo cómic pop art</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">+ $11.99</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Diseño 6 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer">
+                    <img src="https://placehold.co/400x400" alt="Ilustración de skyline urbano nocturno con detalles en neón" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold mb-1">Neon City</h3>
+                        <p class="text-sm text-gray-600 mb-2">Diseño urbano futurista</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium">+ $9.99</span>
+                            <span class="text-xs bg-gray-200 px-2 py-1 rounded">TOP VENTAS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="border border-black px-6 py-2 rounded-full font-medium hover:bg-black hover:text-white transition">
+                    Ver más diseños
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrito de compras Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex justify-end">
+        <div class="bg-white w-full max-w-md h-full overflow-y-auto">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 class="text-xl font-bold">Tu carrito</h3>
+                <button id="closeCartBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="p-4">
+                <!-- Ejemplo de item en carrito -->
+                <div class="border-b pb-4 mb-4 hidden" id="emptyCartMessage">
+                    <div class="text-center py-8">
+                        <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                        <p class="text-gray-500">Tu carrito está vacío</p>
+                    </div>
+                </div>
+                
+                <div class="hidden" id="cartItemTemplate">
+                    <div class="flex justify-between mb-4">
+                        <div class="flex">
+                            <img src="https://placehold.co/100x100" alt="Producto en carrito" class="w-16 h-16 object-cover rounded">
+                            <div class="ml-3">
+                                <p class="font-medium">Hoodie OMR Black</p>
+                                <p class="text-sm text-gray-500">Talla: M, Color: Negro</p>
+                                <p class="text-sm text-gray-500">Diseño: Neon Waves</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium">$49.99</p>
+                            <div class="flex items-center justify-end mt-1">
+                                <button class="quantity-btn text-gray-500 px-2"><i class="fas fa-minus"></i></button>
+                                <span class="quantity mx-2">1</span>
+                                <button class="quantity-btn text-gray-500 px-2"><i class="fas fa-plus"></i></button>
+                                <button class="remove-btn text-red-600 ml-3"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t">
+                <div class="flex justify-between mb-4">
+                    <span>Subtotal</span>
+                    <span id="cartSubtotal">$0.00</span>
+                </div>
+                <div class="flex justify-between mb-4">
+                    <span>Envío</span>
+                    <span id="cartShipping">Calculado al finalizar</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg">
+                    <span>Total</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+                <button id="checkoutBtn" class="w-full bg-black text-white font-bold py-3 rounded-lg mt-6 hover:bg-gray-800 transition">
+                    Finalizar compra
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contacto y Newsletter -->
+    <section id="contacto" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8">
+                        <h2 class="text-2xl font-bold mb-6">Contacta con nosotros</h2>
+                        <form>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Nombre</label>
+                                <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 mb-2">Mensaje</label>
+                                <textarea rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-600"></textarea>
+                            </div>
+                            <button type="submit" class="bg-black text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition">
+                                Enviar mensaje
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="md:w-1/2 bg-red-600 text-white p-8">
+                        <h2 class="text-2xl font-bold mb-6">Newsletter</h2>
+                        <p class="mb-6">Suscríbete para recibir nuestras últimas novedades, promociones exclusivas y un 10% de descuento en tu primera compra.</p>
+                        <form>
+                            <div class="mb-4">
+                                <input type="email" placeholder="Tu email" class="w-full p-3 border border-red-700 rounded-lg bg-red-500 text-white placeholder-red-300 focus:ring-2 focus:ring-white">
+                            </div>
+                            <button type="submit" class="w-full bg-black text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition">
+                                Suscribirme
+                            </button>
+                        </form>
+                        
+                        <div class="mt-10">
+                            <h3 class="font-bold mb-4">Síguenos</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-red-700 flex items-center justify-center hover:bg-black transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-red-700 flex items-center justify-center hover:bg-black transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-red-700 flex items-center justify-center hover:bg-black transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-red-700 flex items-center justify-center hover:bg-black transition">
+                                    <i class="fab fa-tiktok"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl logo-font mb-4">
+                        <span class="text-red-600">O</span>MR
+                    </h3>
+                    <p class="text-gray-400">Ropa deportiva personalizada de alta calidad para aquellos que buscan destacar.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Enlaces rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Inicio</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Personaliza</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Catálogo</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Diseños</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contacto
